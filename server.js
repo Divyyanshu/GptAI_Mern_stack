@@ -1,9 +1,25 @@
 const express = require("express")
+const morgan = require("morgan")
+const cors = require("cors")
+const colors = require("colors")
+const bodyParser = require('body-parser')
+const dotenv = require("dotenv")
 
 // rest objeet
 const app = express();
 
+// .env setup
+dotenv.config()
+
+// middleware
+app.use(cors())
+app.use(express.json())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(morgan('dev'))
+
+const PORT = process.env.PORT || 8080;
+
 // listen server
-app.listen(8080 , ()=>{
-    console.log("server Running in dev mode on port johe 8080")
-})
+app.listen(8080, ()=>{
+    console.log(`Server Running in ${process.env.DEV_MODE} or mode no port ${PORT}`.bgCyan.white);
+});

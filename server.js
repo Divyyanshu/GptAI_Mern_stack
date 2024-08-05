@@ -16,7 +16,6 @@ const app = express();
 connectDB(process.env.MONGO_URI);
 
 
-
 // middleware
 app.use(cors())
 app.use(express.json())

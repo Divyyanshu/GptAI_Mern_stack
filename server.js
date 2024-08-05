@@ -5,15 +5,17 @@ const colors = require("colors")
 const bodyParser = require('body-parser')
 const dotenv = require("dotenv")
 const connectDB = require("./config/db")
+// .env setup
+dotenv.config()
+
 
 // rest objeet
 const app = express();
 
 // mongoose Connection
-connectDB();
+connectDB(process.env.MONGO_URI);
 
-// .env setup
-dotenv.config()
+
 
 // middleware
 app.use(cors())
@@ -22,6 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('dev'))
 
 const PORT = process.env.PORT || 8080;
+// console.log(PORT)
 
 // listen server
 app.listen(8080, ()=>{
